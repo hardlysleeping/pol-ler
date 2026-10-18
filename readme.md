@@ -10,6 +10,27 @@
 > used, which is usually fine. This fork exists for one specific case, described
 > below. If that case is not yours, use upstream.
 
+> ### ⚠️ This fork will probably not be updated again
+>
+> It was made to solve one problem, it solves it, and it is not maintained
+> further. Do not expect upstream bug fixes, security patches or new features to
+> reach it.
+>
+> That is a real trade-off, not a formality: this fork is a snapshot of upstream
+> as it stood when it was forked, plus twelve lines. If you care about staying
+> current, run upstream and correct the feed hostname by hand instead — see
+> *If you would rather not run a fork* below.
+>
+> If you do want to update it yourself, that is straightforward, because the
+> change is tiny and lives in three files:
+>
+> ```bash
+> git remote add upstream https://github.com/aldotroiano/pol-ler.git
+> git fetch upstream && git merge upstream/master
+> ```
+>
+> Conflicts, if any, will be in the three files listed below and nowhere else.
+
 ## What this fork adds
 
 One environment variable: **`FEED_URL_BASE`**.
