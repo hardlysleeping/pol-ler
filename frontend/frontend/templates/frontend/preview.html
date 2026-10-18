@@ -18,9 +18,9 @@
   <div class="media-body">
     <h4 class="media-heading">{% trans 'subscribe.your_feed' %}:</h4>
     <h3>
-      <a href="{{ feed_url }}" target="_blank"><script type="text/javascript">
+      {% if feed_url_base %}<a href="{{ feed_url_base }}{{ feed_url }}" target="_blank">{{ feed_url_base }}{{ feed_url }}</a>{% else %}<a href="{{ feed_url }}" target="_blank"><script type="text/javascript">
         document.write(location.protocol + '//' + location.hostname);
-      </script>{{ feed_url }}</a>
+      </script>{{ feed_url }}</a>{% endif %}
     </h3>
   </div>
 

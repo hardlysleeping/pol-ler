@@ -12,7 +12,7 @@ from django.core.exceptions import ValidationError
 from django.urls import reverse
 
 from .forms import IndexForm
-from .settings import DOWNLOADER_PAGE_URL, FEED_PAGE_URL
+from .settings import DOWNLOADER_PAGE_URL, FEED_PAGE_URL, FEED_URL_BASE
 
 from .setup_tool import get_selection_tag_ids, build_xpathes_for_items
 from .setup_tool_ext import build_xpath_results
@@ -230,7 +230,8 @@ def preview(request, feed_id):
     if request.method == 'GET': 
         return render(request, 'frontend/preview.html',
                         {
-                            'feed_url': FEED_PAGE_URL + feed_id
+                            'feed_url': FEED_PAGE_URL + feed_id,
+                            'feed_url_base': FEED_URL_BASE,
                         })
 
     return HttpResponseBadRequest('Only GET method supported')

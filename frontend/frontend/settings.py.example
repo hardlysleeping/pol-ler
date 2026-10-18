@@ -179,6 +179,13 @@ DOWNLOADER_PAGE_URL = '/downloader?url='
 
 FEED_PAGE_URL = '/feed/'
 
+# Base URL used when DISPLAYING the copyable feed link.
+# Empty = old behaviour (derived from the browser's address bar).
+# Set this to the address OTHER CONTAINERS can reach, because a reader such as
+# FreshRSS fetches feeds server-side from inside its own container, where a
+# tailnet TLS front or a LAN address is unreachable. Example: http://pol-ler:8088
+FEED_URL_BASE = os.environ.get('FEED_URL_BASE', '')
+
 DOWNLOADER_USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36'
 # limit of seconds in which user can access separate feed
 FEED_REQUEST_PERIOD_LIMIT = 0

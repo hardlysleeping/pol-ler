@@ -1,3 +1,86 @@
+# Pol-ler (freshRSS fork)
+
+> **This is a fork of [aldotroiano/pol-ler](https://github.com/aldotroiano/pol-ler)**
+> with one small feature added, made for use with the
+> **[pol-ler Sites](https://github.com/dilroopg/freshrss-poller-sites)** FreshRSS
+> extension. Upstream is MIT-licensed; so is this.
+>
+> **You do not need this fork.** Stock upstream works. If you run upstream's own
+> compose file the feed URL comes out relative to whatever hostname your browser
+> used, which is usually fine. This fork exists for one specific case, described
+> below. If that case is not yours, use upstream.
+
+## What this fork adds
+
+One environment variable: **`FEED_URL_BASE`**.
+
+### The problem it solves
+
+pol-ler shows you a copyable subscribe link, built in the browser from
+`location.protocol + '//' + location.hostname`. That is correct when the browser
+and the reader are the same machine — but a feed reader fetches the URL
+**server-side, from inside its own container**.
+
+So if you open pol-ler in a browser at `https://myhost.ts.net:8444` and copy that
+link into FreshRSS, the link is dead: inside the FreshRSS container,
+`myhost.ts.net:8444` is either unreachable or resolves to nothing. The same
+applies to a LAN address, or to `localhost`.
+
+The address that actually works is pol-ler's name on the shared Docker network —
+`http://pol-ler:8088` — which no browser can reach. Two addresses, one of which
+is useless to each side.
+
+### The fix
+
+Set `FEED_URL_BASE` and the displayed subscribe link uses it verbatim instead of
+guessing from the browser:
+
+```yaml
+services:
+  pol-ler:
+    environment:
+      FEED_URL_BASE: 'http://pol-ler:8088'
+```
+
+With it set, the link in pol-ler's feed preview is already the correct internal
+address, ready to paste into FreshRSS. Unset (the default), behaviour is exactly
+upstream's — the browser-derived link, unchanged.
+
+### What changed, precisely
+
+Three files, 12 lines added, 4 removed:
+
+| File | Change |
+|---|---|
+| `frontend/frontend/settings.py.example` | reads `FEED_URL_BASE` from the environment, defaults empty |
+| `frontend/frontend/views.py` | passes it to the preview template |
+| `frontend/frontend/templates/frontend/preview.html` | uses it for the link when set; otherwise the original script tag runs unchanged |
+
+No database schema change, no API change, no behaviour change when the variable
+is unset. Upstream's compose file is untouched.
+
+### Compatibility
+
+Tested against upstream at commit `a31bb5e`. Because the change is a single
+optional environment variable that defaults to the old behaviour, it applies
+cleanly to any upstream version with the same templates.
+
+## If you would rather not run a fork
+
+Two alternatives, both fine:
+
+1. **Use upstream, and edit the feed URL by hand** after adding it to your
+   reader. Every feed works; you just correct the hostname once.
+2. **Publish pol-ler on an address that both your browser and the container can
+   reach** — typically the host's LAN IP. Then the browser-derived link is
+   already correct and no fork is needed.
+
+The fork is a convenience for the shared-Docker-network setup. It is not
+required, and it is not a bug fix for upstream — upstream's behaviour is right
+for the case it was written for.
+
+---
+
 
 
 ## Pol-ler
