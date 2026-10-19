@@ -1,10 +1,10 @@
 # Pol-ler (freshRSS fork)
 
-Part of [dilroopg's FreshRSS extensions](https://github.com/dilroopg/freshrss-extensions) — see the hub for everything else.
+Part of [hardlysleeping's FreshRSS extensions](https://github.com/hardlysleeping/freshrss-extensions) — see the hub for everything else.
 
 > **This is a fork of [aldotroiano/pol-ler](https://github.com/aldotroiano/pol-ler)**
 > with one small feature added, made for use with the
-> **[pol-ler Sites](https://github.com/dilroopg/freshrss-poller-sites)** FreshRSS
+> **[pol-ler Sites](https://github.com/hardlysleeping/freshrss-poller-sites)** FreshRSS
 > extension. Upstream is MIT-licensed; so is this.
 >
 > **You do not need this fork.** Stock upstream works. If you run upstream's own
