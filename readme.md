@@ -164,3 +164,7 @@ http://localhost:8088
 ## License
 
 MIT - 2016 Alexandr Nesterenko (https://github.com/taroved/pol)
+
+## Support
+
+[![Donate with PayPal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=RNT5W4XNC64EY)
