@@ -3,3 +3,9 @@ settings.py
 frontend/frontend/static
 mysql/
 *.mo
+
+# compiled stylesheet build products (pipeline/compass output, not sources).
+# These sat beside their .scss/.less sources and made collectstatic emit
+# doubled names like wizard.css.css, which broke the manifest lookup.
+frontend/frontend/assets/frontend/stylesheets/*.css.css
+frontend/frontend/assets/frontend/stylesheets/*.css.css.map
